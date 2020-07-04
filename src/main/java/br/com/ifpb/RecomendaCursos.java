@@ -8,17 +8,16 @@ import org.apache.mahout.cf.taste.recommender.Recommender;
 import java.io.IOException;
 import java.util.List;
 
-public class RecomendaProdutos {
+public class RecomendaCursos {
+    public static void main(String[] args) throws IOException, TasteException {
+        DataModel cursos = new Recomendador().getModeloDeCursos();
+        Recommender recommender = new RecomendadorBuilder().buildRecommender(cursos);
 
-    public static void main(String[] args) throws TasteException, IOException {
-        DataModel produtos = new Recomendador().getModeloProdutos();
-
-        Recommender recommender = new RecomendadorBuilder().buildRecommender(produtos);
-
-        System.out.println("usuário 1");
-        List<RecommendedItem> recommendations = recommender.recommend(1, 4);
+        List<RecommendedItem> recommendations = recommender.recommend(15, 6);
         for (RecommendedItem recommendation : recommendations) {
             System.out.println(recommendation);
         }
+
+
     }
 }
